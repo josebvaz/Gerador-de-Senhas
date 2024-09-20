@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GERADOR DE SENHAS</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <style>
+    * {
+      text-align: center
+    }
+    p{
+      color: red
+    }
+    #display {
+      width: 40%;
+      right: 30px;
+      border: 2px solid #000;
+      border-radius: 5px;
+      background-color: white
+    }
+    body{
+      padding: 300px;
+      background-image: linear-gradient(#9cecfb, #0052d4);
+      height: 100vh
+    }
+    #container{
+      border: 3px solid #000;
+      border-radius: 10px;
+      padding: 5%
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div id="container">
+      <h1>Gerador de Senhas</h1>
+      <p>OBS: contém 12 caracteres</p>
+      <input id="display" placeholder="Clique no botão para gerar sua senha!" v-model="senha">
+      <br><br>
+      <button type="button" class="btn btn-outline-success" v-on:click="gerarSenha">Gerar Senha</button>
+      <button type="button" class="btn btn-outline-danger" v-on:click="limpar">Limpar</button>
+    </div>
+  </div>
+
+  <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          senha: ''
+        },
+        methods:{
+          gerarSenha(){
+            const num = '0123456789';
+            const letmaius = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            const letminus = 'abcdefghijklmnopkrstuvwxyz';
+            const espec = '!@#$%&*';
+
+            let novaSenha = ''; 
+
+            // Função auxiliar para pegar um caractere aleatório de uma string
+            function getRandomChar(str) {
+              return str.charAt(Math.floor(Math.random() * str.length));
+            }
+
+            // 3 números
+            for (let i = 0; i < 3; i++) {
+              novaSenha += getRandomChar(num);
+            }
+
+            // 3 letras minúsculas
+            for (let i = 0; i < 3; i++) {
+              novaSenha += getRandomChar(letmaius);
+            }
+
+            // 3 letras maiúsculas
+            for (let i = 0; i < 3; i++) {
+              novaSenha += getRandomChar(letminus);
+            }
+
+            // 3 caracteres especiais
+            for (let i = 0; i < 3; i++) {
+              novaSenha += getRandomChar(espec);
+            }
+
+            this.senha = novaSenha.split('').sort(() => Math.random() - 0.5).join('');
+            
+          },
+          limpar(){
+            this.senha = '';
+            alert("Certifique-se de salvar a senha anterior!")
+          }
+        }
+      })
+  </script>
+</body>
+</html>
