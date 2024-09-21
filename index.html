@@ -46,7 +46,7 @@
       <h1 class="text-center">Gerador de Senhas</h1>
       <p class="text-center">OBS: contém 12 caracteres</p>
       <div class="mb-3">
-        <input id="display" class="form-control text-center" placeholder="Clique no botão para gerar sua senha!" v-model="senha" readonly>
+        <input id="display" class="form-control text-center" placeholder="Clique no botão para gerar sua senha!" v-model="senha">
       </div>
       <div class="d-flex justify-content-center">
         <button type="button" class="btn btn-outline-success me-2" v-on:click="gerarSenha">Gerar Senha</button>
@@ -70,27 +70,27 @@
 
             let novaSenha = ''; 
 
-            // Função auxiliar para pegar um caractere aleatório de uma string
+            
             function getRandomChar(str) {
               return str.charAt(Math.floor(Math.random() * str.length));
             }
 
-            // 3 números
+            
             for (let i = 0; i < 3; i++) {
               novaSenha += getRandomChar(num);
             }
 
-            // 3 letras minúsculas
+            
             for (let i = 0; i < 3; i++) {
               novaSenha += getRandomChar(letmaius);
             }
 
-            // 3 letras maiúsculas
+            
             for (let i = 0; i < 3; i++) {
               novaSenha += getRandomChar(letminus);
             }
 
-            // 3 caracteres especiais
+            
             for (let i = 0; i < 3; i++) {
               novaSenha += getRandomChar(espec);
             }
